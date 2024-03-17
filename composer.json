@@ -1,0 +1,21 @@
+{
+    "name": "root/project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Vitor Guedes",
+            "email": "vtrf2.0@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "symfony/workflow": "7.1.x-dev",
+        "symfony/event-dispatcher": "7.1.x-dev",
+        "symfony/routing": "7.1.x-dev",
+        "symfony/http-foundation": "7.1.x-dev"
+    }
+}
