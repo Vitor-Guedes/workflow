@@ -85,4 +85,24 @@ class Workflow
         }
         return [];
     }
+
+    /**
+     * @param string
+     */
+    public function statusFormat()
+    {
+        $map = [
+            'pending' => 'Aguardando',
+            'confirmed' => 'Confirmado',
+            'completed' => 'Completo',
+            'invalidated' => 'Invalido'
+        ];
+        return $map[$this->status];
+    }
+
+    public function subject_classFormat()
+    {
+        $subject = $this->loadSubject();
+        return $subject->email;
+    }
 }

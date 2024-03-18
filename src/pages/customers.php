@@ -1,50 +1,76 @@
-<h3> # Lista de Clientes </h3>
+<!DOCTYPE html>
+<html lang="pt_BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
 
-<table>
+    <div class="container mx-auto flex justify-around">
+        <h2 class="text-3xl text-blue-700"> Lista de Clientes </h2>
 
-    <thead>
+        <a class="text-blue-700 no-underline hover:underline" href="/">Workflows</a>
+    </div>
 
-        <tr>
+    <div class="container mx-auto mt-5 flex justify-around">
+        
+        <form action="/customers/store" method="post">
+            
+            <div class="w-96 flex mb-2">
+                <label class="w-32" for="name">Nome:</label>
+                <input class="w-64 border p-1" name="name" id="name" placeholder="Nome do Cliente" type="text">
+            </div>
 
-            <td> id </td>
-            <td> name </td>
-            <td> email </td>
+            <div class="w-96 flex mb-2">
+                <label class="w-32" for="email">Email:</label>
+                <input class="w-64 border p-1" name="email" id="email" placeholder="Email do Cliente" type="text">
+            </div>
 
-        </tr>
+            <div class="w-96 flex justify-center">
+                <button class="rounded-md bg-blue-700 text-white p-2" type="submit">Salvar</button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="container mx-auto mt-5">
+
+        <table class="table-fixed w-full text-center">
+
+            <thead class="border-b border-black">
+
+                <tr>
+
+                    <th> Id </th>
+                    <th> Nome </th>
+                    <th> Email </th>
+
+                </tr>
 
 
-    </thead>
+            </thead>
 
-    <tbody>
+            <tbody>
 
-        <?php foreach ($customers as $customer) : ?>
+                <?php foreach ($customers as $customer) : ?>
 
-            <tr>
+                    <tr>
 
-                <td> <?php echo $customer->id ?> </td>
-                <td> <?php echo $customer->name ?> </td>
-                <td> <?php echo $customer->email ?> </td>
+                        <td> <?php echo $customer->id ?> </td>
+                        <td> <?php echo $customer->name ?> </td>
+                        <td> <?php echo $customer->email ?> </td>
 
-            </tr>
+                    </tr>
 
-        <?php endforeach ; ?>
+                <?php endforeach ; ?>
 
-    </tbody>
+            </tbody>
 
-</table>
+        </table>
 
-<hr>
-
-<form action="/customers/store" method="post">
-    
-    <label for="name">Nome:</label>
-    <input name="name" id="name" placeholder="Nome do Cliente" type="text">
-    <label for="email">Email:</label>
-    <input name="email" id="email" placeholder="Email do Cliente" type="text">
-    <button type="submit">Salvar</button>
-
-</form>
-
-<hr>
-
-<a href="/">Workflows</a>
+    </div>
+</body>
+</html>
