@@ -118,7 +118,7 @@ class CustomerWorkflow extends Workflow
 
         $this->name = 'customer';
         $this->status = 'new';
-        $this->subject_table = get_class($this->getSubject());
+        $this->subject_class = get_class($this->getSubject());
         $this->subject_id = $this->getSubject()->id;
 
         $this->getWorkflow()->apply($this, $this->getTransition());
@@ -187,6 +187,6 @@ class CustomerWorkflow extends Workflow
      */
     public function loadSubject()
     {
-        return (new $this->subject_table)->find($this->subject_id);
+        return (new $this->subject_class)->find($this->subject_id);
     }
 }

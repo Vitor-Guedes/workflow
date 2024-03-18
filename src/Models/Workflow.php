@@ -16,14 +16,14 @@ class Workflow
 
     public $status;
 
-    public $subject_table;
+    public $subject_class;
 
     public $subject_id;
 
     protected $fillable = [
         'name',
         'status',
-        'subject_table',
+        'subject_class',
         'subject_id'
     ];
 
@@ -44,7 +44,7 @@ class Workflow
             'id' => $this->id,
             'name' => $this->name,
             'status' => $this->status,
-            'subject_table' => $this->subject_table,
+            'subject_class' => $this->subject_class,
             'subject_id' => $this->subject_id,
         ];
     }
@@ -67,7 +67,7 @@ class Workflow
     public function load($id)
     {
         $workflow = $this->find($id);
-        $subject = new $workflow->subject_table;
+        $subject = new $workflow->subject_class;
         $customWorkflow = $subject->workflow;
         return (new $customWorkflow)->makeInstance($workflow->toArray())->template();
     }

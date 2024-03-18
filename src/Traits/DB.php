@@ -48,8 +48,6 @@ trait DB
         
         $query = "INSERT INTO {$this->table} (%s) VALUES (%s)";
 
-        var_dump($query, $this->bindValues());
-
         $query = sprintf($query, $this->bindColumns(), $this->binds());
         $statement = DatabaseManager::connection()->prepare($query);
         $statement->execute($this->bindValues());

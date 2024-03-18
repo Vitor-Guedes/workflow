@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use Exception;
+use App\DatabaseManager;
 use App\Models\Customer;
 use App\Models\Workflow;
 use App\Workflows\CustomerWorkflow;
@@ -22,16 +24,24 @@ class IndexController
 
     public function storeCustomer()
     {
-        $request = request();
-        $customer = new Customer();
-        $customer->name = $request->get('name');
-        $customer->email = $request->get('email');
-        $customer->save();
+        try {
+            DatabaseManager::beginTransaction();
 
-        $workflow = new CustomerWorkflow($customer, 'on_hold');
-        $workflow->create();
+            $request = request();
+            $customer = new Customer();
+            $customer->name = $request->get('name');
+            $customer->email = $request->get('email');
+            $customer->save();
 
-        redirect('/customers', true);
+            $workflow = new CustomerWorkflow($customer, 'on_hold');
+            $workflow->create();
+
+            DatabaseManager::commit();
+        } catch (Exception $e) {
+            DatabaseManager::rollback();
+        } finally {
+            redirect('/customers', true);
+        }
     }
 
     public function transition($id, $transition)
